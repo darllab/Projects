@@ -1,4 +1,6 @@
---Employee who hasn't confirmed their attendance 
+In this SQL project, I use the dataset from my company. I play along with it so I can practice.
+
+--Employee who hasn't confirmed their attendance--
 
 SELECT 
 	name,
@@ -16,10 +18,11 @@ order by
 	sf_id ASC
 LIMIT 100
 
---Employee who confirmed their attendance
+
+--Employee who confirmed their attendance--
 
 SELECT 
-	name, 
+    name, 
     sf_id,
     email_address,
     confirmation_of_attendance
