@@ -3,19 +3,19 @@ In this SQL project, I use the dataset from my company. I play along with it so 
 --Employee who hasn't confirmed their attendance--
 
 SELECT 
-	name,
+    name,
     sf_id,
     email_address,
     confirmation_of_attendance
 FROM 
-	STBTCARDINALRULESSAFETYFUNDAMENTALSAUGSEP2023
+    STBTCARDINALRULESSAFETYFUNDAMENTALSAUGSEP2023
 WHERE 
-	confirmation_of_attendance = 'No'
+    confirmation_of_attendance = 'No'
 group BY
-	sf_id,
+    sf_id,
     name
 order by 
-	sf_id ASC
+    sf_id ASC
 LIMIT 100
 
 
