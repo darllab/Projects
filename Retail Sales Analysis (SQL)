@@ -1,4 +1,8 @@
--- Start of Portfolio Project # 1 using SQL, we will do EDA for Amazon Sales Analysis --
+Start of Portfolio Project # 1 using SQL, we will do EDA for Amazon Sales Analysis. 
+DATASET: https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-commerce-sales-data?resource=download from KAGGLE
+Credits to the owner of the dataset.
+
+-- Start running a query -- 
 
 SELECT *
 FROM sales_amazon_7
