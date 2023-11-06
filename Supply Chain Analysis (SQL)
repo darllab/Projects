@@ -1,0 +1,92 @@
+CREATE TABLE supply_chain (
+	product_type TEXT,
+	SKU TEXT,
+	price REAL,
+	availability INT,
+	number_of_product_sold INT,
+	revenue_generated REAL,
+	customer_demographic TEXT,
+	stock_levels INT,
+	lead_times INT,
+	order_quantities INT,
+	shipping_times INT,
+	shipping_carriers TEXT,
+	shipping_costs REAL,
+	supplier_name TEXT,
+	location TEXT,
+	lead_time INT,
+	production_volume INT,
+	manufacturing_lead_time INT,
+	manufacturing_costs REAL,
+	inspection_results TEXT,
+	defect_rates TEXT,
+	transportation_modes TEXT,
+	routes TEXT,
+	costs REAL
+
+)
+
+COPY supply_chain FROM '/private/tmp/supply_chain_data.csv' WITH CSV HEADER;
+
+SELECT *
+FROM supply_chain
+
+-- COST ANALYSIS --
+-- What are the most costly products to produce? --
+
+SELECT MAX(product_type) 
+FROM supply_chain
+GROUP BY product_type
+
+
+-- How do manufacturing costs relate to selling prices? --
+
+SELECT product_type, SUM(manufacturing_costs) 
+FROM supply_chain
+GROUP BY product_type
+
+UNION
+
+SELECT product_type, SUM(price) 
+FROM supply_chain
+GROUP BY product_type
+
+-- What is the overall profitability (revenue - costs) for each product? --
+
+SELECT product_type, SUM(revenue_generated) AS total_revenue
+FROM supply_chain
+GROUP BY product_type
+ORDER BY total_revenue DESC
+
+SELECT product_type, SUM(costs) AS total_cost
+FROM supply_chain
+GROUP BY product_type
+ORDER BY total_cost DESC
+
+
+
+-- LOGISTIC ANALYSIS --
+
+-- What are the most common transportation modes used? --
+
+SELECT DISTINCT(transportation_modes)
+FROM supply_chain
+
+-- How do different transportation modes affect lead times and costs? --
+
+SELECT transportation_modes, SUM(lead_times) AS total_leadtimes
+FROM supply_chain
+GROUP BY transportation_modes
+ORDER BY total_leadtimes DESC
+
+SELECT transportation_modes, SUM(costs) AS total_cost
+FROM supply_chain
+GROUP BY transportation_modes
+ORDER BY total_cost DESC
+
+-- Which routes are most commonly used, and what is their impact on costs and lead times? --
+
+SELECT DISTINCT routes, transportation_modes, costs, SUM(lead_times) AS route_time
+FROM supply_chain
+GROUP by routes, transportation_modes, costs
+ORDER by route_time DESC
