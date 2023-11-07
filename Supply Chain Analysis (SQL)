@@ -34,20 +34,17 @@ FROM supply_chain
 -- COST ANALYSIS --
 -- What are the most costly products to produce? --
 
-SELECT MAX(product_type) 
+SELECT MAX(product_type), SUM(costs)::NUMERIC(10,2)
 FROM supply_chain
 GROUP BY product_type
-
 
 -- How do manufacturing costs relate to selling prices? --
 
-SELECT product_type, SUM(manufacturing_costs) 
+SELECT product_type, SUM(manufacturing_costs)::NUMERIC(10,2) AS manufacturing_costs
 FROM supply_chain
 GROUP BY product_type
 
-UNION
-
-SELECT product_type, SUM(price) 
+SELECT product_type, SUM(price)::NUMERIC(10,2) AS manufacturing_price
 FROM supply_chain
 GROUP BY product_type
 
@@ -79,14 +76,21 @@ FROM supply_chain
 GROUP BY transportation_modes
 ORDER BY total_leadtimes DESC
 
-SELECT transportation_modes, SUM(costs) AS total_cost
+SELECT transportation_modes, SUM(costs)::NUMERIC(10,2) AS total_cost
 FROM supply_chain
 GROUP BY transportation_modes
 ORDER BY total_cost DESC
 
 -- Which routes are most commonly used, and what is their impact on costs and lead times? --
 
-SELECT DISTINCT routes, transportation_modes, costs, SUM(lead_times) AS route_time
+SELECT costs::NUMERIC(10,2), SUM(lead_times) AS lead_times
 FROM supply_chain
-GROUP by routes, transportation_modes, costs
-ORDER by route_time DESC
+WHERE routes IN ('Route A', 'Route B', 'Route C', 'Route D')
+GROUP BY costs
+ORDER BY lead_times DESC
+
+SELECT routes, costs::NUMERIC(10,2), SUM(lead_times) AS lead_times
+FROM supply_chain
+WHERE routes IN ('Route A', 'Route B', 'Route C', 'Route D')
+GROUP BY routes, costs
+ORDER BY lead_times DESC
