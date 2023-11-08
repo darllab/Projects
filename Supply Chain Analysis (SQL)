@@ -94,3 +94,7 @@ FROM supply_chain
 WHERE routes IN ('Route A', 'Route B', 'Route C', 'Route D')
 GROUP BY routes, costs
 ORDER BY lead_times DESC
+
+
+
+-- You can view the dashboard here on Tableau Public, here's the link for Cost Analysis: https://public.tableau.com/app/profile/darlla.bulagner/viz/CostAnalysisPortfolioProject/Dashboard1 --
