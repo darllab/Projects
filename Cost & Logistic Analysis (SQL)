@@ -84,15 +84,10 @@ GROUP BY product_type
 
 -- What is the overall profitability (revenue - costs) for each product? --
 
-SELECT product_type, SUM(revenue_generated) AS total_revenue
-FROM supply_chain
-GROUP BY product_type
-ORDER BY total_revenue DESC
-
-SELECT product_type, SUM(costs) AS total_cost
-FROM supply_chain
-GROUP BY product_type
-ORDER BY total_cost DESC
+SELECT product_type,
+	revenue_generated - costs AS overall_profitability
+FROM supply_chain	
+ORDER BY product_type DESC
 
 
 
@@ -132,3 +127,28 @@ ORDER BY lead_times DESC
 
 
 -- You can view the dashboard here on Tableau Public, here's the link for Cost Analysis: https://public.tableau.com/app/profile/darlla.bulagner/viz/CostAnalysisPortfolioProject/Dashboard1 --
+
+
+
+
+ANSWER THE QUESTIONS:
+
+COST ANALYSIS:
+
+1. What are the most costly products to produce? 
+-- We can conclude that the most costly products that has produce is Skincare. 
+
+2. How do manufacturing costs relate to selling prices?
+-- As the manufacturing cost highly, the selling prices also increase. The business needs to increase prices so that
+they can recover to their costs.
+
+3. What is the overall profitability (revenue - costs) for each product?
+skincare	219,398.84
+haircare	157,126.53
+cosmetics	148,154.87
+
+
+LOGISTICS ANALYSIS:
+
+1. What are the most common transportation modes used?
+-- 
