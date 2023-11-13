@@ -3,7 +3,8 @@ DATASET: https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-com
 Credits to the owner of the dataset.
 
 -- Start running a query -- 
-
+-- Extract, Transform and Load --
+  
 SELECT *
 FROM sales_amazon_7
 
@@ -42,4 +43,6 @@ GROUP BY date
 ORDER BY peak_sales DESC
 
 -- Since the dataset only contains year 2022, I just focused on peak sales period per month -- 
+
+
 
