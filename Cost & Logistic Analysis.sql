@@ -112,23 +112,12 @@ ORDER BY total_cost DESC
 
 -- Which routes are most commonly used, and what is their impact on costs and lead times? --
 
-SELECT costs::NUMERIC(10,2), SUM(lead_times) AS lead_times
+SELECT routes, SUM(lead_times) AS lead_times, SUM(costs)::NUMERIC(10,2) AS total_costs
 FROM supply_chain
-WHERE routes IN ('Route A', 'Route B', 'Route C', 'Route D')
-GROUP BY costs
-ORDER BY lead_times DESC
-
-SELECT routes, costs::NUMERIC(10,2), SUM(lead_times) AS lead_times
-FROM supply_chain
-WHERE routes IN ('Route A', 'Route B', 'Route C', 'Route D')
-GROUP BY routes, costs
-ORDER BY lead_times DESC
-
+GROUP BY routes
 
 
 -- You can view the dashboard here on Tableau Public, here's the link for Cost Analysis: https://public.tableau.com/app/profile/darlla.bulagner/viz/CostAnalysisPortfolioProject/Dashboard1 --
-
-
 
 
 ANSWER THE QUESTIONS:
@@ -143,12 +132,21 @@ COST ANALYSIS:
 they can recover to their costs.
 
 3. What is the overall profitability (revenue - costs) for each product?
-skincare	219,398.84
-haircare	157,126.53
-cosmetics	148,154.87
+-- skincare	219,398.84
+-- haircare	157,126.53
+-- cosmetics	148,154.87
+
 
 
 LOGISTICS ANALYSIS:
 
 1. What are the most common transportation modes used?
--- 
+-- The common transportation modes used are Air, Rail, Sea and Road.
+
+2. How do different transportation modes affect lead times and costs?
+-- If these tranportation modes takes longer lead time, the company may have suffer higher costs for them to deliver the shipment on time.
+-- Because the longer the lead time, these carrier may have need to charge the company additional courier fee. 
+-- Also, the couriers charged depends on how much days delayed. If they're gonna put some costs for these modes, they're gonna pass it on the consumers.
+
+3. Which routes are most commonly used, and what is their impact on costs and lead times? 
+-- Routes A and B are the most commonly used. The longer the lead time, the higher the costs. 
