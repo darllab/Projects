@@ -208,3 +208,5 @@ category	return_product
 "Blouse"	12
 "Bottom"	5
 "Saree"		1
+
+You can see the dashboard in my Tableau Public: https://public.tableau.com/app/profile/darlla.bulagner/viz/PortfolioProject2_16998509900550/Dashboard1
