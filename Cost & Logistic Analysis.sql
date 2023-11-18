@@ -60,10 +60,14 @@ CREATE TABLE supply_chain (
 
 )
 
+-- Extract, Transform and Load --
+
 COPY supply_chain FROM '/private/tmp/supply_chain_data.csv' WITH CSV HEADER;
 
 SELECT *
 FROM supply_chain
+
+
 
 -- COST ANALYSIS --
 -- What are the most costly products to produce? --
@@ -74,22 +78,16 @@ GROUP BY product_type
 
 -- How do manufacturing costs relate to selling prices? --
 
-SELECT product_type, SUM(manufacturing_costs)::NUMERIC(10,2) AS manufacturing_costs
-FROM supply_chain
-GROUP BY product_type
-
-SELECT product_type, SUM(price)::NUMERIC(10,2) AS manufacturing_price
+SELECT product_type, SUM(manufacturing_costs)::NUMERIC(10,2) AS manufacturing_costs, SUM(price)::NUMERIC(10,2) AS manufacturing_price
 FROM supply_chain
 GROUP BY product_type
 
 -- What is the overall profitability (revenue - costs) for each product? --
 
-SELECT product_type,
-	revenue_generated - costs AS overall_profitability
-FROM supply_chain	
-ORDER BY product_type DESC
-
-
+SELECT product_type, SUM(costs)::NUMERIC(10,2) AS total_costs, SUM(revenue_generated)::NUMERIC(10,2) AS revenue_generated,
+	SUM(revenue_generated - costs) AS overall_profitability
+FROM supply_chain
+GROUP BY product_type
 
 -- LOGISTIC ANALYSIS --
 
@@ -100,15 +98,9 @@ FROM supply_chain
 
 -- How do different transportation modes affect lead times and costs? --
 
-SELECT transportation_modes, SUM(lead_times) AS total_leadtimes
+SELECT transportation_modes, SUM(lead_times) AS total_leadtimes, SUM(costs) AS total_costs
 FROM supply_chain
 GROUP BY transportation_modes
-ORDER BY total_leadtimes DESC
-
-SELECT transportation_modes, SUM(costs)::NUMERIC(10,2) AS total_cost
-FROM supply_chain
-GROUP BY transportation_modes
-ORDER BY total_cost DESC
 
 -- Which routes are most commonly used, and what is their impact on costs and lead times? --
 
