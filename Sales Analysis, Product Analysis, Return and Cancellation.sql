@@ -100,10 +100,13 @@ GROUP BY category
 
 -- What is the return and cancellation rate -- 
 
-SELECT status, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM sales_analysis1) AS percentage_rate
+SELECT
+    COUNT(CASE WHEN status = 'Shipped - Returned to Seller' THEN 1 END) AS return_count,
+    COUNT(CASE WHEN status = 'Pending' THEN 1 END) AS cancellation_count,
+    COUNT(*) AS total_orders,
+    (COUNT(CASE WHEN status = 'Shipped - Returned to Seller' THEN 1 END) * 100.0 / COUNT(*)) AS return_rate,
+    (COUNT(CASE WHEN status = 'Pending' THEN 1 END) * 100.0 / COUNT(*)) AS cancellation_rate
 FROM sales_analysis1
-WHERE status IN ('Cancelled', 'Shipped - Returned to Seller')
-GROUP BY status;
 
 
 -- Are there specific products or categories that have a higher return rate? --
