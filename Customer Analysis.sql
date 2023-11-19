@@ -1,4 +1,5 @@
--- CUSTOMER ANALYSIS --
+-- CUSTOMER ANALYSIS using E-Commerce Sales dataset --
+-- Dataset from Kaggle: https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-commerce-sales-data?resource=download
 
 SELECT * 
 FROM sales_analysis1
