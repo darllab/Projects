@@ -1,5 +1,6 @@
 -- CUSTOMER ANALYSIS using E-Commerce Sales dataset --
--- Dataset from Kaggle: https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-commerce-sales-data?resource=download
+-- Dataset from Kaggle: https://www.kaggle.com/datasets/thedevastator/unlock-profits-with-e-commerce-sales-data?resource=download--
+-- Database: PostgreSQL 
 
 SELECT * 
 FROM sales_analysis1
@@ -29,3 +30,11 @@ ORDER BY cancellation_count DESC
 SELECT b2b, COUNT(*) as customer_count
 FROM sales_analysis1
 GROUP BY b2b
+
+
+ANSWERS:
+
+1. What are the top cities/states/countries for sales?
+
+
+
