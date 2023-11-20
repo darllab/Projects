@@ -35,6 +35,23 @@ GROUP BY b2b
 ANSWERS:
 
 1. What are the top cities/states/countries for sales?
+"JALANDHAR"	5495
+"KANPUR"	2860
+"MAHENDRAGARH"	2796
+"NAGPUR"	2598
+"THANE"	2598
+"SARDARSHAHAR"	2598
+"DIGRAS"	2598
+"KURNOOL"	2442
+"PUNE"	2442
+"ALWAR"	2372
+
+2. Are there any trends in order cancellations?
 
 
+
+3. What is the distribution of b2b vs b2c customers? 
+  b2b	  customer_count
+  false	32081
+  true	267
 
