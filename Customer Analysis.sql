@@ -27,9 +27,10 @@ ORDER BY cancellation_count DESC
 
 -- What is the distribution of B2B vs B2C customers? -- 
 
-SELECT b2b, COUNT(*) as customer_count
+SELECT 
+	COUNT(CASE WHEN b2b = 'False' THEN 1 END) AS customer_false,
+	COUNT(CASE WHEN b2b = 'True' THEN 1 END) AS customer_true
 FROM sales_analysis1
-GROUP BY b2b
 
 
 ANSWERS:
