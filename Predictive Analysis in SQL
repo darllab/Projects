@@ -1,0 +1,72 @@
+-- Predictive Analysis --
+
+-- The goal of this analysis is to predict whether the future loans should be approved or not --
+
+-- Let's try to answer these following questions --
+
+-- 1. How many loans where approved or not? --
+
+SELECT 
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved
+from loan_data_1    
+
+-- 2. Does the applicant income affects the application of their loans? --
+
+SELECT applicantincome,
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved,
+    COALESCE(applicantincome, '10000') AS new_income
+FROM loan_data_1
+GROUP BY applicantincome
+order by applicantincome DESC
+LIMIT 10
+
+-- 3. Does the loan amount varies regardless of the applicant income? Does it approved or not? -- 
+
+SELECT applicantincome, loanamount,
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved
+FROM loan_data_1    
+GROUP BY applicantincome, loanamount
+LIMIT 10
+
+-- 4. Does the education affects the loan application? --
+
+SELECT education,
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved
+FROM loan_data_1 
+group by education
+
+-- 5. How many self employed were approved their loan or not? --
+
+select self_employed,
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved
+FROM loan_data_1
+group by self_employed
+
+-- 6. What should be the average income for you to approved your loan? --
+
+SELECT 
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved,
+    AVG(applicantincome) as avg_income
+FROM loan_data_1    
+
+-- 7. What should be the average income of your co-applicant for you to approved your loan? --
+
+SELECT 
+	COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved,
+    AVG(coapplicantincome) AS avg_co_income
+FROM loan_data_1   
+
+-- 8. Should you get short term loan or long term loan? -- 
+
+SELECT 
+	AVG(loan_amount_term) AS avg_loan_term,
+    COUNT(CASE WHEN loan_status = 'Y' THEN 1 ELSE NULL END) AS approved,
+    COUNT(CASE WHEN loan_status = 'N' then 1 else NULL END) AS disapproved
+FROM loan_data_1    
